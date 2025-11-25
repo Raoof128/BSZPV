@@ -1,0 +1,32 @@
+{
+  "name": "zkp-blockchain-verifier",
+  "version": "0.1.0",
+  "description": "Production-ready zk-SNARK verification toolkit for Ethereum-compatible chains.",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint . && solhint 'contracts/**/*.sol'",
+    "format": "prettier --write '**/*.{js,ts,json,md}'",
+    "format:check": "prettier --check '**/*.{js,ts,json,md}'",
+    "test": "npm run test:contracts && npm run test:circuit",
+    "test:contracts": "npm run build:artifacts && hardhat test --no-compile test/verifier.test.js",
+    "test:circuit": "mocha test/circuit.test.js",
+    "build:artifacts": "node scripts/build_artifacts.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "chai": "^4.3.10",
+    "eslint": "^9.8.0",
+    "eslint-plugin-import": "^2.29.1",
+    "globals": "^15.9.0",
+    "hardhat": "^2.19.4",
+    "mocha": "^10.2.0",
+    "prettier": "^3.2.4",
+    "solc": "^0.8.20",
+    "solhint": "^4.5.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "snarkjs": "^0.7.0"
+  }
+}

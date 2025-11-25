@@ -1,0 +1,10 @@
+{
+  "extends": "solhint:recommended",
+  "plugins": [],
+  "rules": {
+    "func-visibility": ["error", {"ignoreConstructors": true}],
+    "compiler-version": ["error", "^0.8.20"],
+    "max-line-length": ["warn", 140],
+    "immutable-vars-naming": "off"
+  }
+}
