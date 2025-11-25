@@ -29,7 +29,11 @@ function assertProofShape(proof) {
     process.exit(1);
   }
 
-  if (!Array.isArray(proof.pi_b) || proof.pi_b.length < 2 || proof.pi_b.some((row) => !Array.isArray(row) || row.length < 2)) {
+  if (
+    !Array.isArray(proof.pi_b) ||
+    proof.pi_b.length < 2 ||
+    proof.pi_b.some((row) => !Array.isArray(row) || row.length < 2)
+  ) {
     console.error('[!] Proof.pi_b must be a 2x2 array.');
     process.exit(1);
   }
@@ -62,7 +66,9 @@ function formatForCalldata(proof, publicSignals) {
 async function main() {
   const [inputPath, wasmPath, zkeyPath, outputPath] = process.argv.slice(2);
   if (!inputPath || !wasmPath || !zkeyPath) {
-    console.error('Usage: node scripts/generate_proof.js <input.json> <circuit.wasm> <circuit.zkey> [output.json]');
+    console.error(
+      'Usage: node scripts/generate_proof.js <input.json> <circuit.wasm> <circuit.zkey> [output.json]'
+    );
     process.exit(1);
   }
 
@@ -79,7 +85,11 @@ async function main() {
   }
 
   console.info('[+] Generating proof');
-  const { proof, publicSignals } = await snarkjs.groth16.fullProve(witnessInput, wasmPath, zkeyPath);
+  const { proof, publicSignals } = await snarkjs.groth16.fullProve(
+    witnessInput,
+    wasmPath,
+    zkeyPath
+  );
 
   const formatted = formatForCalldata(proof, publicSignals);
 
@@ -87,7 +97,10 @@ async function main() {
   console.info(JSON.stringify({ proof, publicSignals, calldata: formatted }, null, 2));
 
   if (outputPath) {
-    fs.writeFileSync(outputPath, JSON.stringify({ proof, publicSignals, calldata: formatted }, null, 2));
+    fs.writeFileSync(
+      outputPath,
+      JSON.stringify({ proof, publicSignals, calldata: formatted }, null, 2)
+    );
     console.info(`[+] Saved proof bundle to ${outputPath}`);
   }
 }

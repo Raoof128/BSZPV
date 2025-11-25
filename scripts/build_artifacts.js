@@ -97,7 +97,9 @@ function main() {
 
   if (output.errors) {
     const hasError = output.errors.some((err) => err.severity === 'error');
-    output.errors.forEach((err) => console.error(`[solc] ${err.severity}: ${err.formattedMessage}`));
+    output.errors.forEach((err) =>
+      console.error(`[solc] ${err.severity}: ${err.formattedMessage}`)
+    );
     if (hasError) {
       process.exit(1);
     }
